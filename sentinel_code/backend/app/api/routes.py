@@ -40,6 +40,7 @@ async def start_remediation(request: RemediationRequest, background_tasks: Backg
     workflow_id = str(uuid.uuid4())
     
     initial_state = RemediationState(
+        workflow_id=workflow_id,
         code_path=request.code_path,
         vulnerability_type=request.vulnerability_type,
         iteration_count=0

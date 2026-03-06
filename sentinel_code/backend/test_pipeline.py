@@ -4,8 +4,9 @@ from app.models.state import RemediationState
 def test_pipeline():
     print("Testing End-to-End Pipeline...")
     initial_state = RemediationState(
-        code_path="../sandbox/vulnerable_code.py",
-        vulnerability_type="SQL Injection",
+        workflow_id="test_bof_1",
+        code_path="../../vulnerable_bof.c",
+        vulnerability_type="Buffer Overflow",
         iteration_count=0
     )
     

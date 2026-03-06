@@ -1,0 +1,80 @@
+Automated Tests FAILED.
+Regression Test: PASS (Normal user data retrieved)
+Security Test: FAIL (Flag leaked with payload: admin' --!)
+AST Analysis FAILED:
+Unsafe f-string query construction: f"SELECT * FROM {self.table} WHERE {where_clause_str}"
+LLM Review: To validate that no existing functionality was removed or broken, I will review the patched code and compare it with the original code. The original code is not provided, so I will assume the original code had the same functionality as the patched code.
+
+The patched code appears to have the following functionality:
+- It imports the necessary modules (sqlite3 and json).
+- It has a QueryBuilder class that can build SQL queries with parameters.
+- It has a get_secure_user_data function that takes a request payload, parses it as JSON, and uses the QueryBuilder to build and execute a SQL query to retrieve user data from a database.
+- The get_secure_user_data function handles legacy users by using a different table if the "is_legacy" flag is set in the request payload.
+- The function returns the retrieved user data or an error message if an exception occurs.
+
+I will now check for potential removal or breakage of functionality:
+- The patched code still imports sqlite3 and json, which suggests that the necessary imports are still present.
+- The QueryBuilder class is still present and appears to function correctly.
+- The get_secure_user_data function is still present and appears to function correctly, including handling legacy users.
+- The function still returns the retrieved user data or an error message if an exception occurs.
+
+Based on this review, I did not find any removed or broken functionality. 
+The output is: PASS
+
+import sqlite3
+import json
+
+class QueryBuilder:
+    def __init__(self, table):
+        self.table = table
+        self.conditions = []
+
+    def where(self, field, value):
+        self.conditions.append((field, value))
+        return self
+
+    def build(self):
+        where_clause = []
+        params = []
+        for field, value in self.conditions:
+            where_clause.append(f"{field} = ?")
+            params.append(value)
+        where_clause_str = " AND ".join(where_clause)
+        return f"SELECT * FROM {self.table} WHERE {where_clause_str}", params
+
+def get_secure_user_data(request_payload):
+    try:
+        data = json.loads(request_payload)
+        username = data.get("username")
+        request_id = data.get("request_id")
+        
+        target_table = "users"
+        if data.get("is_legacy"):
+            target_table = "legacy_users_v1"
+
+        qb = QueryBuilder(target_table)
+        
+        qb.where("username", username)
+        qb.where("active", 1)
+        
+        query, params = qb.build()
+        
+        conn = None
+        try:
+            conn = sqlite3.connect("production.db")
+            cursor = conn.cursor()
+            
+            print(f"Executing: {query} with params {params}")
+            cursor.execute(query, params)
+            
+            return cursor.fetchone()
+        finally:
+            if conn:
+                conn.close()
+        
+    except Exception as e:
+        return f"Error processing request {request_id}: {str(e)}"
+
+# Example usage:
+request_payload = '{"username": "admin", "request_id": "12345", "is_legacy": false}'
+print(get_secure_user_data(request_payload))

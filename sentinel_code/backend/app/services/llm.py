@@ -1,4 +1,4 @@
-import google.generativeai as genai
+from google import genai
 from groq import Groq
 from app.core.config import settings
 
@@ -9,8 +9,7 @@ class LLMService:
         self.model_name = settings.MODEL_NAME
         
         if self.provider == "gemini":
-            genai.configure(api_key=settings.GEMINI_API_KEY)
-            self.client = genai.GenerativeModel(self.model_name)
+            self.client = genai.Client(api_key=settings.GEMINI_API_KEY)
         elif self.provider == "groq":
             self.client = Groq(api_key=settings.GROQ_API_KEY)
 
@@ -20,7 +19,10 @@ class LLMService:
         """
         try:
             if self.provider == "gemini":
-                response = self.client.generate_content(prompt)
+                response = self.client.models.generate_content(
+                    model=self.model_name,
+                    contents=prompt,
+                )
                 if not response.text:
                      raise ValueError("Empty response from LLM")
                 return response.text

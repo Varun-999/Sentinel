@@ -1,0 +1,116 @@
+{
+    "workflow_id": "99197e6d-29be-494c-914c-51d882ec3fe0",
+    "events": [
+        {
+            "timestamp": "2026-03-06T08:05:51.557221",
+            "agent": "Orchestrator",
+            "action": "Workflow Started",
+            "details": {
+                "workflow_id": "99197e6d-29be-494c-914c-51d882ec3fe0",
+                "code_path": "E:\\sentinel\\Sentinel\\vulnerable_bof.c",
+                "vulnerability_type": "Buffer Overflow",
+                "exploit_success": false,
+                "exploit_payloads": [],
+                "patch_diff": null,
+                "patch_explanation": null,
+                "verification_status": "PENDING",
+                "verification_reasoning": null,
+                "iteration_count": 0,
+                "max_iterations": 3
+            }
+        },
+        {
+            "timestamp": "2026-03-06T08:05:51.575335",
+            "agent": "Red Agent",
+            "action": "Attacking",
+            "details": {
+                "message": "Starting attack simulation"
+            }
+        },
+        {
+            "timestamp": "2026-03-06T08:05:51.589327",
+            "agent": "Red Agent",
+            "action": "Execution",
+            "details": {
+                "message": "Executing payloads against E:\\sentinel\\Sentinel\\vulnerable_bof.c via TestHarness..."
+            }
+        },
+        {
+            "timestamp": "2026-03-06T08:05:57.646386",
+            "agent": "Red Agent",
+            "action": "Payload Sent",
+            "details": {
+                "payload": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+            }
+        },
+        {
+            "timestamp": "2026-03-06T08:06:01.742714",
+            "agent": "Red Agent",
+            "action": "Payload Failed",
+            "details": {
+                "output": null,
+                "error": "HTTPConnectionPool(host='localhost', port=5000): Max retries exceeded with url: /analyze_bof (Caused by NewConnectionError(\"HTTPConnection(host='localhost', port=5000): Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it\"))"
+            }
+        },
+        {
+            "timestamp": "2026-03-06T08:06:01.744026",
+            "agent": "Red Agent",
+            "action": "Payload Sent",
+            "details": {
+                "payload": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+            }
+        },
+        {
+            "timestamp": "2026-03-06T08:06:05.881830",
+            "agent": "Red Agent",
+            "action": "Payload Failed",
+            "details": {
+                "output": null,
+                "error": "HTTPConnectionPool(host='localhost', port=5000): Max retries exceeded with url: /analyze_bof (Caused by NewConnectionError(\"HTTPConnection(host='localhost', port=5000): Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it\"))"
+            }
+        },
+        {
+            "timestamp": "2026-03-06T08:06:05.882601",
+            "agent": "Red Agent",
+            "action": "Payload Sent",
+            "details": {
+                "payload": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+            }
+        },
+        {
+            "timestamp": "2026-03-06T08:06:09.973644",
+            "agent": "Red Agent",
+            "action": "Payload Failed",
+            "details": {
+                "output": null,
+                "error": "HTTPConnectionPool(host='localhost', port=5000): Max retries exceeded with url: /analyze_bof (Caused by NewConnectionError(\"HTTPConnection(host='localhost', port=5000): Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it\"))"
+            }
+        },
+        {
+            "timestamp": "2026-03-06T08:06:09.976397",
+            "agent": "Red Agent",
+            "action": "Failed",
+            "details": {
+                "message": "All payloads failed. Vulnerability might be patched."
+            }
+        },
+        {
+            "timestamp": "2026-03-06T08:06:09.991556",
+            "agent": "Orchestrator",
+            "action": "Workflow Completed",
+            "details": {
+                "workflow_id": "99197e6d-29be-494c-914c-51d882ec3fe0",
+                "code_path": "E:\\sentinel\\Sentinel\\vulnerable_bof.c",
+                "vulnerability_type": "Buffer Overflow",
+                "exploit_success": false,
+                "exploit_payloads": [],
+                "patch_diff": null,
+                "patch_explanation": null,
+                "verification_status": "PENDING",
+                "verification_reasoning": null,
+                "iteration_count": 0,
+                "max_iterations": 3
+            }
+        }
+    ]
+}

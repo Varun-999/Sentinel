@@ -1,0 +1,167 @@
+{
+    "workflow_id": "f0f67b6d-5ddf-4f37-a4df-80b91802faa9",
+    "events": [
+        {
+            "timestamp": "2026-03-06T07:32:40.220314",
+            "agent": "Orchestrator",
+            "action": "Workflow Started",
+            "details": {
+                "workflow_id": "f0f67b6d-5ddf-4f37-a4df-80b91802faa9",
+                "code_path": "E:\\sentinel\\Sentinel\\vulnerable_code.py",
+                "vulnerability_type": "SQL Injection",
+                "exploit_success": false,
+                "exploit_payloads": [],
+                "patch_diff": null,
+                "patch_explanation": null,
+                "verification_status": "PENDING",
+                "verification_reasoning": null,
+                "iteration_count": 0,
+                "max_iterations": 3
+            }
+        },
+        {
+            "timestamp": "2026-03-06T07:32:40.271702",
+            "agent": "Red Agent",
+            "action": "Attacking",
+            "details": {
+                "message": "Starting attack simulation"
+            }
+        },
+        {
+            "timestamp": "2026-03-06T07:32:40.296425",
+            "agent": "Red Agent",
+            "action": "Execution",
+            "details": {
+                "message": "Executing payloads against E:\\sentinel\\Sentinel\\vulnerable_code.py via TestHarness..."
+            }
+        },
+        {
+            "timestamp": "2026-03-06T07:32:46.437855",
+            "agent": "Red Agent",
+            "action": "Payload Sent",
+            "details": {
+                "payload": "' OR '1'='1"
+            }
+        },
+        {
+            "timestamp": "2026-03-06T07:32:50.519726",
+            "agent": "Red Agent",
+            "action": "Payload Failed",
+            "details": {
+                "output": null,
+                "error": "HTTPConnectionPool(host='localhost', port=5000): Max retries exceeded with url: /analyze (Caused by NewConnectionError(\"HTTPConnection(host='localhost', port=5000): Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it\"))"
+            }
+        },
+        {
+            "timestamp": "2026-03-06T07:32:50.520790",
+            "agent": "Red Agent",
+            "action": "Payload Sent",
+            "details": {
+                "payload": "admin' --"
+            }
+        },
+        {
+            "timestamp": "2026-03-06T07:32:54.628997",
+            "agent": "Red Agent",
+            "action": "Payload Failed",
+            "details": {
+                "output": null,
+                "error": "HTTPConnectionPool(host='localhost', port=5000): Max retries exceeded with url: /analyze (Caused by NewConnectionError(\"HTTPConnection(host='localhost', port=5000): Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it\"))"
+            }
+        },
+        {
+            "timestamp": "2026-03-06T07:32:54.631056",
+            "agent": "Red Agent",
+            "action": "Payload Sent",
+            "details": {
+                "payload": "admin' #"
+            }
+        },
+        {
+            "timestamp": "2026-03-06T07:32:58.744019",
+            "agent": "Red Agent",
+            "action": "Payload Failed",
+            "details": {
+                "output": null,
+                "error": "HTTPConnectionPool(host='localhost', port=5000): Max retries exceeded with url: /analyze (Caused by NewConnectionError(\"HTTPConnection(host='localhost', port=5000): Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it\"))"
+            }
+        },
+        {
+            "timestamp": "2026-03-06T07:32:58.746405",
+            "agent": "Red Agent",
+            "action": "Payload Sent",
+            "details": {
+                "payload": "admin' /*"
+            }
+        },
+        {
+            "timestamp": "2026-03-06T07:33:02.847232",
+            "agent": "Red Agent",
+            "action": "Payload Failed",
+            "details": {
+                "output": null,
+                "error": "HTTPConnectionPool(host='localhost', port=5000): Max retries exceeded with url: /analyze (Caused by NewConnectionError(\"HTTPConnection(host='localhost', port=5000): Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it\"))"
+            }
+        },
+        {
+            "timestamp": "2026-03-06T07:33:02.849613",
+            "agent": "Red Agent",
+            "action": "Payload Sent",
+            "details": {
+                "payload": "' UNION SELECT 1,2,3,4,5 --"
+            }
+        },
+        {
+            "timestamp": "2026-03-06T07:33:06.997479",
+            "agent": "Red Agent",
+            "action": "Payload Failed",
+            "details": {
+                "output": null,
+                "error": "HTTPConnectionPool(host='localhost', port=5000): Max retries exceeded with url: /analyze (Caused by NewConnectionError(\"HTTPConnection(host='localhost', port=5000): Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it\"))"
+            }
+        },
+        {
+            "timestamp": "2026-03-06T07:33:07.000068",
+            "agent": "Red Agent",
+            "action": "Payload Sent",
+            "details": {
+                "payload": "' UNION SELECT 1,username,password,active,data FROM users WHERE username='admin' --"
+            }
+        },
+        {
+            "timestamp": "2026-03-06T07:33:11.095947",
+            "agent": "Red Agent",
+            "action": "Payload Failed",
+            "details": {
+                "output": null,
+                "error": "HTTPConnectionPool(host='localhost', port=5000): Max retries exceeded with url: /analyze (Caused by NewConnectionError(\"HTTPConnection(host='localhost', port=5000): Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it\"))"
+            }
+        },
+        {
+            "timestamp": "2026-03-06T07:33:11.108239",
+            "agent": "Red Agent",
+            "action": "Failed",
+            "details": {
+                "message": "All payloads failed. Vulnerability might be patched."
+            }
+        },
+        {
+            "timestamp": "2026-03-06T07:33:11.151457",
+            "agent": "Orchestrator",
+            "action": "Workflow Completed",
+            "details": {
+                "workflow_id": "f0f67b6d-5ddf-4f37-a4df-80b91802faa9",
+                "code_path": "E:\\sentinel\\Sentinel\\vulnerable_code.py",
+                "vulnerability_type": "SQL Injection",
+                "exploit_success": false,
+                "exploit_payloads": [],
+                "patch_diff": null,
+                "patch_explanation": null,
+                "verification_status": "PENDING",
+                "verification_reasoning": null,
+                "iteration_count": 0,
+                "max_iterations": 3
+            }
+        }
+    ]
+}

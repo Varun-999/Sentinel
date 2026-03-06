@@ -5,6 +5,7 @@ class RemediationState(BaseModel):
     """
     Shared state for the remediation workflow.
     """
+    workflow_id: str = Field(..., description="Unique ID for the workflow run.")
     code_path: str = Field(..., description="Path to the vulnerable code file.")
     vulnerability_type: str = Field(..., description="Type of vulnerability (e.g., SQL Injection).")
     
