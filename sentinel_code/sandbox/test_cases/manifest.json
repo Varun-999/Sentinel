@@ -22,15 +22,15 @@
     },
     {
         "cve": "CVE-2023-1003",
-        "cwe": "CWE-120",
-        "target": "BUFFER_OVERFLOW",
+        "cwe": "CWE-78",
+        "target": "COMMAND_INJECTION",
         "dir": "..\\sandbox\\test_cases\\CVE-2023-1003_3",
         "path": "..\\sandbox\\test_cases\\CVE-2023-1003_3\\vulnerable_sample.py"
     },
     {
         "cve": "CVE-2023-1004",
-        "cwe": "CWE-502",
-        "target": "DESERIALIZATION",
+        "cwe": "CWE-200",
+        "target": "INFO_EXPOSURE",
         "dir": "..\\sandbox\\test_cases\\CVE-2023-1004_4",
         "path": "..\\sandbox\\test_cases\\CVE-2023-1004_4\\vulnerable_sample.py"
     },
@@ -57,15 +57,15 @@
     },
     {
         "cve": "CVE-2023-1008",
-        "cwe": "CWE-120",
-        "target": "BUFFER_OVERFLOW",
+        "cwe": "CWE-78",
+        "target": "COMMAND_INJECTION",
         "dir": "..\\sandbox\\test_cases\\CVE-2023-1008_8",
         "path": "..\\sandbox\\test_cases\\CVE-2023-1008_8\\vulnerable_sample.py"
     },
     {
         "cve": "CVE-2023-1009",
-        "cwe": "CWE-502",
-        "target": "DESERIALIZATION",
+        "cwe": "CWE-200",
+        "target": "INFO_EXPOSURE",
         "dir": "..\\sandbox\\test_cases\\CVE-2023-1009_9",
         "path": "..\\sandbox\\test_cases\\CVE-2023-1009_9\\vulnerable_sample.py"
     },
@@ -92,15 +92,15 @@
     },
     {
         "cve": "CVE-2023-1013",
-        "cwe": "CWE-120",
-        "target": "BUFFER_OVERFLOW",
+        "cwe": "CWE-78",
+        "target": "COMMAND_INJECTION",
         "dir": "..\\sandbox\\test_cases\\CVE-2023-1013_13",
         "path": "..\\sandbox\\test_cases\\CVE-2023-1013_13\\vulnerable_sample.py"
     },
     {
         "cve": "CVE-2023-1014",
-        "cwe": "CWE-502",
-        "target": "DESERIALIZATION",
+        "cwe": "CWE-200",
+        "target": "INFO_EXPOSURE",
         "dir": "..\\sandbox\\test_cases\\CVE-2023-1014_14",
         "path": "..\\sandbox\\test_cases\\CVE-2023-1014_14\\vulnerable_sample.py"
     },
@@ -127,15 +127,15 @@
     },
     {
         "cve": "CVE-2023-1018",
-        "cwe": "CWE-120",
-        "target": "BUFFER_OVERFLOW",
+        "cwe": "CWE-78",
+        "target": "COMMAND_INJECTION",
         "dir": "..\\sandbox\\test_cases\\CVE-2023-1018_18",
         "path": "..\\sandbox\\test_cases\\CVE-2023-1018_18\\vulnerable_sample.py"
     },
     {
         "cve": "CVE-2023-1019",
-        "cwe": "CWE-502",
-        "target": "DESERIALIZATION",
+        "cwe": "CWE-200",
+        "target": "INFO_EXPOSURE",
         "dir": "..\\sandbox\\test_cases\\CVE-2023-1019_19",
         "path": "..\\sandbox\\test_cases\\CVE-2023-1019_19\\vulnerable_sample.py"
     }

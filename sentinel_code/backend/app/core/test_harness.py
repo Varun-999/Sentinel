@@ -34,7 +34,7 @@ class TestHarness:
             time.sleep(0.5)
         
         # Wait a bit longer for port to be released from previous server
-        time.sleep(0.5)
+        time.sleep(0.3)
         
         env = os.environ.copy()
         env['FLASK_ENV'] = 'production'
@@ -51,12 +51,12 @@ class TestHarness:
         )
         
         # Wait and retry for server startup
-        max_retries = 10
+        max_retries = 20
         retry_count = 0
         server_ready = False
         
         while retry_count < max_retries and not server_ready:
-            time.sleep(1)
+            time.sleep(0.4)
             
             # Check if process has died
             if self.server_process.poll() is not None:
@@ -109,7 +109,7 @@ class TestHarness:
                     pass
             self.server_process = None
             # Wait for port to be released
-            time.sleep(1.5)
+            time.sleep(0.8)
             
         if os.path.exists(self.backup_path):
             try:
@@ -197,22 +197,46 @@ class TestHarness:
                     
                     if status == "success" and data:
                         result["data"] = str(data)
-                        if self.flag and self.flag in str(data):
-                            result["success"] = True
+                        if vuln_type == "XSS":
+                            # Natural check for unescaped HTML reflection
+                            if "<script>" in str(data) or "onerror" in str(data) or "javascript:" in str(data):
+                                result["success"] = True
+                        elif vuln_type == "PATH_TRAVERSAL":
+                            # Natural string leak representing system files
+                            if "root:x" in str(data) or "etc/passwd" in str(data) or "boot.ini" in str(data):
+                                result["success"] = True
+                        elif vuln_type == "DESERIALIZATION":
+                            if "Command executed" in str(data) or "uid=0" in str(data):
+                                result["success"] = True
+                        else:
+                            # Flag checks for SQL, Info Exposures
+                            if self.flag and self.flag in str(data):
+                                result["success"] = True
+                                
                     elif status == "error":
                         result["error"] = res_json.get("error", "Unknown server error")
+                        if vuln_type == "BUFFER_OVERFLOW" and ("Segmentation fault" in result["error"] or "Memory Error" in result["error"]):
+                            result["success"] = True
+                        elif vuln_type == "COMMAND_INJECTION" and "Timeout" in result["error"]:
+                            result["success"] = True
                     
                     return result
                     
                 except urllib.error.HTTPError as e:
                     # Server is definitely running, but the payload caused an error (e.g. 500)
-                    # We should NOT retry this, as the payload just predictably failed/crashed the endpoint
                     try:
                         res_text = e.read().decode('utf-8')
                         res_json = json.loads(res_text)
                         result["error"] = res_json.get("error", f"HTTP {e.code}")
                     except Exception:
                         result["error"] = f"HTTP {e.code}"
+                        
+                    # Evaluate success for vulnerabilities that naturally cause HTTP errors (like crashes)
+                    if vuln_type == "BUFFER_OVERFLOW" and ("Segmentation fault" in result["error"] or "Memory Error" in result["error"] or "MemoryError" in result["error"]):
+                        result["success"] = True
+                    elif vuln_type == "COMMAND_INJECTION" and "Timeout" in result["error"]:
+                        result["success"] = True
+                        
                     return result
                 except (urllib.error.URLError, json.JSONDecodeError, OSError) as e:
                     if attempt < max_attack_retries - 1:

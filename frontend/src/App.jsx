@@ -3,7 +3,8 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import RemediationForm from './components/RemediationForm';
 import StatusView from './components/StatusView';
 import MetricsShowcase from './components/MetricsShowcase';
-import { Shield, Activity, Code2 } from 'lucide-react';
+import VulnerabilityClasses from './components/VulnerabilityClasses';
+import { Shield, Activity, Code2, BookOpen } from 'lucide-react';
 
 const queryClient = new QueryClient();
 
@@ -43,6 +44,12 @@ function App() {
                            >
                              <Activity className="w-4 h-4" /> Metrics Showcase
                            </button>
+                           <button 
+                             onClick={() => setActiveTab('vulns')}
+                             className={`flex items-center gap-2 px-3 py-1.5 text-xs font-medium rounded-md transition-colors ${activeTab === 'vulns' ? 'bg-rose-500/20 text-rose-300' : 'text-slate-400 hover:text-slate-200'}`}
+                           >
+                             <BookOpen className="w-4 h-4" /> Vuln Classes
+                           </button>
                         </div>
                         
                         <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-emerald-500/10 text-emerald-400 text-xs rounded-full border border-emerald-500/20 backdrop-blur-md font-medium shadow-[0_0_10px_rgba(16,185,129,0.1)]">
@@ -55,6 +62,8 @@ function App() {
                 <main className="max-w-screen mx-auto space-y-8 relative z-10">
                     {activeTab === 'metrics' ? (
                         <MetricsShowcase />
+                    ) : activeTab === 'vulns' ? (
+                        <VulnerabilityClasses />
                     ) : (
                         !workflowId ? (
                             <>

@@ -2,15 +2,15 @@
     "summary_metrics": {
         "total_cases": 20,
         "total_known_vulns": 20,
-        "true_positives": 4,
+        "true_positives": 16,
         "false_positives": 0,
-        "successful_patches": 4,
-        "regressions_caused": 0,
-        "total_mttr_seconds": 1807.3391542434692,
-        "total_tokens_used": 2921,
-        "adversarial_tests_passed": 4,
-        "functional_tests_passed": 4,
-        "total_adversarial_tests": 4,
+        "successful_patches": 12,
+        "regressions_caused": 4,
+        "total_mttr_seconds": 1943.492374420166,
+        "total_tokens_used": 8592,
+        "adversarial_tests_passed": 12,
+        "functional_tests_passed": 12,
+        "total_adversarial_tests": 16,
         "total_functional_tests": 20
     },
     "detailed_reports": [
@@ -20,7 +20,7 @@
             "detected": [
                 "SQL"
             ],
-            "mttr_sec": 100.21,
+            "mttr_sec": 98.7,
             "verification_status": "PASS",
             "regression_passed": true,
             "security_passed": true
@@ -28,38 +28,44 @@
         {
             "cve": "CVE-2023-1001",
             "ground_truth": "XSS",
-            "detected": [],
-            "mttr_sec": 86.43,
+            "detected": [
+                "XSS"
+            ],
+            "mttr_sec": 99.33,
             "verification_status": "PASS",
-            "regression_passed": null,
-            "security_passed": null
+            "regression_passed": true,
+            "security_passed": true
         },
         {
             "cve": "CVE-2023-1002",
             "ground_truth": "PATH_TRAVERSAL",
-            "detected": [],
-            "mttr_sec": 87.33,
+            "detected": [
+                "PATH_TRAVERSAL"
+            ],
+            "mttr_sec": 99.05,
             "verification_status": "PASS",
-            "regression_passed": null,
-            "security_passed": null
+            "regression_passed": true,
+            "security_passed": true
         },
         {
             "cve": "CVE-2023-1003",
-            "ground_truth": "BUFFER_OVERFLOW",
+            "ground_truth": "COMMAND_INJECTION",
             "detected": [],
-            "mttr_sec": 87.9,
+            "mttr_sec": 86.82,
             "verification_status": "PASS",
             "regression_passed": null,
             "security_passed": null
         },
         {
             "cve": "CVE-2023-1004",
-            "ground_truth": "DESERIALIZATION",
-            "detected": [],
-            "mttr_sec": 86.58,
+            "ground_truth": "INFO_EXPOSURE",
+            "detected": [
+                "INFO_EXPOSURE"
+            ],
+            "mttr_sec": 108.59,
             "verification_status": "PASS",
-            "regression_passed": null,
-            "security_passed": null
+            "regression_passed": true,
+            "security_passed": true
         },
         {
             "cve": "CVE-2023-1005",
@@ -67,7 +73,7 @@
             "detected": [
                 "SQL"
             ],
-            "mttr_sec": 100.23,
+            "mttr_sec": 99.16,
             "verification_status": "PASS",
             "regression_passed": true,
             "security_passed": true
@@ -75,38 +81,44 @@
         {
             "cve": "CVE-2023-1006",
             "ground_truth": "XSS",
-            "detected": [],
-            "mttr_sec": 86.78,
+            "detected": [
+                "XSS"
+            ],
+            "mttr_sec": 97.58,
             "verification_status": "PASS",
-            "regression_passed": null,
-            "security_passed": null
+            "regression_passed": true,
+            "security_passed": true
         },
         {
             "cve": "CVE-2023-1007",
             "ground_truth": "PATH_TRAVERSAL",
-            "detected": [],
-            "mttr_sec": 87.52,
+            "detected": [
+                "PATH_TRAVERSAL"
+            ],
+            "mttr_sec": 99.13,
             "verification_status": "PASS",
-            "regression_passed": null,
-            "security_passed": null
+            "regression_passed": true,
+            "security_passed": true
         },
         {
             "cve": "CVE-2023-1008",
-            "ground_truth": "BUFFER_OVERFLOW",
+            "ground_truth": "COMMAND_INJECTION",
             "detected": [],
-            "mttr_sec": 90.04,
+            "mttr_sec": 86.95,
             "verification_status": "PASS",
             "regression_passed": null,
             "security_passed": null
         },
         {
             "cve": "CVE-2023-1009",
-            "ground_truth": "DESERIALIZATION",
-            "detected": [],
-            "mttr_sec": 89.81,
+            "ground_truth": "INFO_EXPOSURE",
+            "detected": [
+                "INFO_EXPOSURE"
+            ],
+            "mttr_sec": 107.57,
             "verification_status": "PASS",
-            "regression_passed": null,
-            "security_passed": null
+            "regression_passed": true,
+            "security_passed": true
         },
         {
             "cve": "CVE-2023-1010",
@@ -114,7 +126,7 @@
             "detected": [
                 "SQL"
             ],
-            "mttr_sec": 102.43,
+            "mttr_sec": 97.84,
             "verification_status": "PASS",
             "regression_passed": true,
             "security_passed": true
@@ -122,38 +134,44 @@
         {
             "cve": "CVE-2023-1011",
             "ground_truth": "XSS",
-            "detected": [],
-            "mttr_sec": 88.67,
+            "detected": [
+                "XSS"
+            ],
+            "mttr_sec": 97.39,
             "verification_status": "PASS",
-            "regression_passed": null,
-            "security_passed": null
+            "regression_passed": true,
+            "security_passed": true
         },
         {
             "cve": "CVE-2023-1012",
             "ground_truth": "PATH_TRAVERSAL",
-            "detected": [],
-            "mttr_sec": 89.56,
+            "detected": [
+                "PATH_TRAVERSAL"
+            ],
+            "mttr_sec": 98.53,
             "verification_status": "PASS",
-            "regression_passed": null,
-            "security_passed": null
+            "regression_passed": true,
+            "security_passed": true
         },
         {
             "cve": "CVE-2023-1013",
-            "ground_truth": "BUFFER_OVERFLOW",
+            "ground_truth": "COMMAND_INJECTION",
             "detected": [],
-            "mttr_sec": 89.31,
+            "mttr_sec": 87.83,
             "verification_status": "PASS",
             "regression_passed": null,
             "security_passed": null
         },
         {
             "cve": "CVE-2023-1014",
-            "ground_truth": "DESERIALIZATION",
-            "detected": [],
-            "mttr_sec": 87.78,
+            "ground_truth": "INFO_EXPOSURE",
+            "detected": [
+                "INFO_EXPOSURE"
+            ],
+            "mttr_sec": 109.11,
             "verification_status": "PASS",
-            "regression_passed": null,
-            "security_passed": null
+            "regression_passed": true,
+            "security_passed": true
         },
         {
             "cve": "CVE-2023-1015",
@@ -161,46 +179,52 @@
             "detected": [
                 "SQL"
             ],
-            "mttr_sec": 99.22,
-            "verification_status": "PASS",
-            "regression_passed": true,
-            "security_passed": true
+            "mttr_sec": 92.28,
+            "verification_status": "FAIL",
+            "regression_passed": false,
+            "security_passed": false
         },
         {
             "cve": "CVE-2023-1016",
             "ground_truth": "XSS",
-            "detected": [],
-            "mttr_sec": 86.97,
-            "verification_status": "PASS",
-            "regression_passed": null,
-            "security_passed": null
+            "detected": [
+                "XSS"
+            ],
+            "mttr_sec": 94.47,
+            "verification_status": "FAIL",
+            "regression_passed": false,
+            "security_passed": false
         },
         {
             "cve": "CVE-2023-1017",
             "ground_truth": "PATH_TRAVERSAL",
-            "detected": [],
-            "mttr_sec": 86.93,
-            "verification_status": "PASS",
-            "regression_passed": null,
-            "security_passed": null
+            "detected": [
+                "PATH_TRAVERSAL"
+            ],
+            "mttr_sec": 93.06,
+            "verification_status": "FAIL",
+            "regression_passed": false,
+            "security_passed": false
         },
         {
             "cve": "CVE-2023-1018",
-            "ground_truth": "BUFFER_OVERFLOW",
+            "ground_truth": "COMMAND_INJECTION",
             "detected": [],
-            "mttr_sec": 86.86,
+            "mttr_sec": 88.68,
             "verification_status": "PASS",
             "regression_passed": null,
             "security_passed": null
         },
         {
             "cve": "CVE-2023-1019",
-            "ground_truth": "DESERIALIZATION",
-            "detected": [],
-            "mttr_sec": 86.8,
-            "verification_status": "PASS",
-            "regression_passed": null,
-            "security_passed": null
+            "ground_truth": "INFO_EXPOSURE",
+            "detected": [
+                "INFO_EXPOSURE"
+            ],
+            "mttr_sec": 101.44,
+            "verification_status": "FAIL",
+            "regression_passed": false,
+            "security_passed": false
         }
     ]
 }

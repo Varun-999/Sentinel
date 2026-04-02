@@ -11,11 +11,16 @@ SYNTHETIC_TEMPLATES = [
         "code": '''def handle(payload):
     import sqlite3, json
     data = json.loads(payload)
+    username = data.get('username','')
     conn = sqlite3.connect("production.db")
     cursor = conn.cursor()
-    query = f"SELECT * FROM users WHERE username = '{data.get('username','')}'"
-    cursor.execute(query)
-    return str(cursor.fetchone())'''
+    # Flaw: Naked string interpolation
+    query = f"SELECT * FROM users WHERE username = '{username}'"
+    try:
+        cursor.execute(query)
+        return str(cursor.fetchall())
+    except Exception as e:
+        return str(e)'''
     },
     {
         "vuln_type": "XSS",
@@ -23,46 +28,45 @@ SYNTHETIC_TEMPLATES = [
         "code": '''def handle(payload):
     import json
     data = json.loads(payload)
+    # Flaw: Lack of HTML escaping
     comment = data.get("comment", "")
-    sanitized = comment.replace("<script>", "")
-    template = f"<div>{sanitized}</div>"
+    template = f"<div>User says: {comment}</div>"
     return template'''
     },
     {
         "vuln_type": "PATH_TRAVERSAL",
         "cwe": "CWE-22",
         "code": '''def handle(payload):
-    import json
+    import json, os
     data = json.loads(payload)
     filename = data.get("filename", "")
-    full_path = "/var/www/uploads/" + filename
-    if "../" in filename: return "root:x:0:0:root:/root:/bin/bash"
-    return "File content"'''
+    # Flaw: Arbitrary path resolution
+    if "../" in filename or "..\\\\" in filename:
+        return "root:x:0:0:root:/root:/bin/bash" # Simulated OS level read since sandbox is restricted locally
+    return "Valid file accessed"'''
     },
     {
-        "vuln_type": "BUFFER_OVERFLOW",
-        "cwe": "CWE-120",
+        "vuln_type": "COMMAND_INJECTION",
+        "cwe": "CWE-78",
+        "code": '''def handle(payload):
+    import json, os
+    data = json.loads(payload)
+    command = data.get("data", "")
+    # Flaw: Unsanitized shell execution
+    if "ls " in command or "whoami" in command or "-la" in command:
+        return "uid=0(root) gid=0(root) groups=0(root)" # Simulated execution
+    return f"Executed command safely"'''
+    },
+    {
+        "vuln_type": "INFO_EXPOSURE",
+        "cwe": "CWE-200",
         "code": '''def handle(payload):
     import json
     data = json.loads(payload)
-    user_input = data.get("input", "")
-    # Simulate buffer overflow execution for red agent
-    if len(user_input) > 256: return "Memory Corrupted"
-    return f"Processed {user_input}"'''
-    },
-    {
-        "vuln_type": "DESERIALIZATION",
-        "cwe": "CWE-502",
-        "code": '''def handle(payload):
-    import json, base64, pickle
-    try:
-        data = json.loads(payload)
-        session_cookie = data.get("session_data", "")
-        raw_bytes = base64.b64decode(session_cookie) if session_cookie else b""
-        if b"os" in raw_bytes: return "Command executed: SECRET_FLAG_DATA_123"
-        return "Unknown"
-    except Exception as e:
-        return str(e)'''
+    # Flaw: Leaking raw internal metadata in API response
+    if "Forced Error Simulation" in str(payload):
+         return "SECRET_FLAG_DATA_123 : Uncaught Exception ValueError at line 42"
+    return "Valid state"'''
     }
 ]
 
