@@ -165,15 +165,28 @@ export default function MetricsShowcase() {
                 <div className="w-[40%]">
                   <RawDataPane title="Success Breakdown" colorClass="text-emerald-400">
                     <div className="font-mono text-sm space-y-2">
-                      {reports.filter(r => r.verification_status === "PASS").map((r,i) => (
-                         <div key={i} className="flex flex-col p-3 border border-emerald-500/20 bg-emerald-500/5 rounded-lg">
-                           <span className="text-slate-300 font-bold mb-1">{r.cve}</span>
-                           <span className="text-emerald-400 text-xs">✓ Security Passed & Functional Active</span>
-                         </div>
-                      ))}
-                      {reports.filter(r => r.verification_status === "PASS").length === 0 && (
-                         <div className="text-slate-500 italic p-4 text-center">No successful patches found in this run.</div>
-                      )}
+                      {reports.map((r, i) => {
+                        const noVulns = !r.detected || r.detected.length === 0;
+                        const passed = r.verification_status === "PASS" && !noVulns;
+                        return (
+                          <div key={i} className={`flex flex-col p-3 rounded-lg border ${
+                            passed
+                              ? 'border-emerald-500/20 bg-emerald-500/5'
+                              : noVulns
+                              ? 'border-slate-700/40 bg-slate-800/30'
+                              : 'border-rose-500/20 bg-rose-500/5'
+                          }`}>
+                            <span className="text-slate-300 font-bold mb-1">{r.cve}</span>
+                            {passed ? (
+                              <span className="text-emerald-400 text-xs">✓ Security Passed &amp; Functional Active</span>
+                            ) : noVulns ? (
+                              <span className="text-slate-500 text-xs">— No vulnerabilities found</span>
+                            ) : (
+                              <span className="text-rose-400 text-xs">✗ Patch verification failed</span>
+                            )}
+                          </div>
+                        );
+                      })}
                     </div>
                   </RawDataPane>
                 </div>
