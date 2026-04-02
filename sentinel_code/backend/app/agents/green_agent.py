@@ -75,6 +75,8 @@ def green_agent(state: RemediationState) -> RemediationState:
 
     state.verification_status = status
     state.verification_reasoning = reasoning
+    state.regression_passed = results["regression_passed"]
+    state.security_passed = results["security_passed"]
         
     final_msg = f"Verification Result: {state.verification_status}"
     if logger:

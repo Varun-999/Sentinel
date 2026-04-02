@@ -1,0 +1,206 @@
+{
+    "summary_metrics": {
+        "total_cases": 20,
+        "total_known_vulns": 20,
+        "true_positives": 4,
+        "false_positives": 0,
+        "successful_patches": 4,
+        "regressions_caused": 0,
+        "total_mttr_seconds": 1807.3391542434692,
+        "total_tokens_used": 2921,
+        "adversarial_tests_passed": 4,
+        "functional_tests_passed": 4,
+        "total_adversarial_tests": 4,
+        "total_functional_tests": 20
+    },
+    "detailed_reports": [
+        {
+            "cve": "CVE-2023-1000",
+            "ground_truth": "SQL",
+            "detected": [
+                "SQL"
+            ],
+            "mttr_sec": 100.21,
+            "verification_status": "PASS",
+            "regression_passed": true,
+            "security_passed": true
+        },
+        {
+            "cve": "CVE-2023-1001",
+            "ground_truth": "XSS",
+            "detected": [],
+            "mttr_sec": 86.43,
+            "verification_status": "PASS",
+            "regression_passed": null,
+            "security_passed": null
+        },
+        {
+            "cve": "CVE-2023-1002",
+            "ground_truth": "PATH_TRAVERSAL",
+            "detected": [],
+            "mttr_sec": 87.33,
+            "verification_status": "PASS",
+            "regression_passed": null,
+            "security_passed": null
+        },
+        {
+            "cve": "CVE-2023-1003",
+            "ground_truth": "BUFFER_OVERFLOW",
+            "detected": [],
+            "mttr_sec": 87.9,
+            "verification_status": "PASS",
+            "regression_passed": null,
+            "security_passed": null
+        },
+        {
+            "cve": "CVE-2023-1004",
+            "ground_truth": "DESERIALIZATION",
+            "detected": [],
+            "mttr_sec": 86.58,
+            "verification_status": "PASS",
+            "regression_passed": null,
+            "security_passed": null
+        },
+        {
+            "cve": "CVE-2023-1005",
+            "ground_truth": "SQL",
+            "detected": [
+                "SQL"
+            ],
+            "mttr_sec": 100.23,
+            "verification_status": "PASS",
+            "regression_passed": true,
+            "security_passed": true
+        },
+        {
+            "cve": "CVE-2023-1006",
+            "ground_truth": "XSS",
+            "detected": [],
+            "mttr_sec": 86.78,
+            "verification_status": "PASS",
+            "regression_passed": null,
+            "security_passed": null
+        },
+        {
+            "cve": "CVE-2023-1007",
+            "ground_truth": "PATH_TRAVERSAL",
+            "detected": [],
+            "mttr_sec": 87.52,
+            "verification_status": "PASS",
+            "regression_passed": null,
+            "security_passed": null
+        },
+        {
+            "cve": "CVE-2023-1008",
+            "ground_truth": "BUFFER_OVERFLOW",
+            "detected": [],
+            "mttr_sec": 90.04,
+            "verification_status": "PASS",
+            "regression_passed": null,
+            "security_passed": null
+        },
+        {
+            "cve": "CVE-2023-1009",
+            "ground_truth": "DESERIALIZATION",
+            "detected": [],
+            "mttr_sec": 89.81,
+            "verification_status": "PASS",
+            "regression_passed": null,
+            "security_passed": null
+        },
+        {
+            "cve": "CVE-2023-1010",
+            "ground_truth": "SQL",
+            "detected": [
+                "SQL"
+            ],
+            "mttr_sec": 102.43,
+            "verification_status": "PASS",
+            "regression_passed": true,
+            "security_passed": true
+        },
+        {
+            "cve": "CVE-2023-1011",
+            "ground_truth": "XSS",
+            "detected": [],
+            "mttr_sec": 88.67,
+            "verification_status": "PASS",
+            "regression_passed": null,
+            "security_passed": null
+        },
+        {
+            "cve": "CVE-2023-1012",
+            "ground_truth": "PATH_TRAVERSAL",
+            "detected": [],
+            "mttr_sec": 89.56,
+            "verification_status": "PASS",
+            "regression_passed": null,
+            "security_passed": null
+        },
+        {
+            "cve": "CVE-2023-1013",
+            "ground_truth": "BUFFER_OVERFLOW",
+            "detected": [],
+            "mttr_sec": 89.31,
+            "verification_status": "PASS",
+            "regression_passed": null,
+            "security_passed": null
+        },
+        {
+            "cve": "CVE-2023-1014",
+            "ground_truth": "DESERIALIZATION",
+            "detected": [],
+            "mttr_sec": 87.78,
+            "verification_status": "PASS",
+            "regression_passed": null,
+            "security_passed": null
+        },
+        {
+            "cve": "CVE-2023-1015",
+            "ground_truth": "SQL",
+            "detected": [
+                "SQL"
+            ],
+            "mttr_sec": 99.22,
+            "verification_status": "PASS",
+            "regression_passed": true,
+            "security_passed": true
+        },
+        {
+            "cve": "CVE-2023-1016",
+            "ground_truth": "XSS",
+            "detected": [],
+            "mttr_sec": 86.97,
+            "verification_status": "PASS",
+            "regression_passed": null,
+            "security_passed": null
+        },
+        {
+            "cve": "CVE-2023-1017",
+            "ground_truth": "PATH_TRAVERSAL",
+            "detected": [],
+            "mttr_sec": 86.93,
+            "verification_status": "PASS",
+            "regression_passed": null,
+            "security_passed": null
+        },
+        {
+            "cve": "CVE-2023-1018",
+            "ground_truth": "BUFFER_OVERFLOW",
+            "detected": [],
+            "mttr_sec": 86.86,
+            "verification_status": "PASS",
+            "regression_passed": null,
+            "security_passed": null
+        },
+        {
+            "cve": "CVE-2023-1019",
+            "ground_truth": "DESERIALIZATION",
+            "detected": [],
+            "mttr_sec": 86.8,
+            "verification_status": "PASS",
+            "regression_passed": null,
+            "security_passed": null
+        }
+    ]
+}

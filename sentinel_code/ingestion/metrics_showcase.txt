@@ -1,0 +1,11 @@
+
+Sentinel Batch Ingestion Metrics Showcase
+=========================================
+Total Cases Analyzed:   20
+True Positive Rate:     20.00% (4/20)
+False Positives (FPR):  0 total incorrect classifications
+Patch Success Rate:     100.00% (Patched 4 out of 4 detected)
+Regression Rate:        0.00% (0 cases ruined functional logic)
+Mean Time To Remediate: 90.37 seconds / vulnerability
+API Token Efficiency:   146.05 tokens / fix
+Verification Rigor:     4/4 Adversarial Tests Passed | 4/20 Functional Tests Passed

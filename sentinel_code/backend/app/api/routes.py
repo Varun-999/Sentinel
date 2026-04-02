@@ -117,3 +117,21 @@ async def get_vulnerabilities():
         "total": len(vulnerabilities),
         "vulnerabilities": vulnerabilities
     }
+
+@router.get("/metrics/showcase")
+async def get_metrics_showcase():
+    import os
+    import json
+    
+    # Path to where batch_runner.py saves the json
+    report_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "../../../ingestion/batch_report.json"))
+    
+    if not os.path.exists(report_path):
+        raise HTTPException(status_code=404, detail="Batch report not found. Run ingestion script first.")
+        
+    try:
+        with open(report_path, "r") as f:
+            data = json.load(f)
+        return data
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))

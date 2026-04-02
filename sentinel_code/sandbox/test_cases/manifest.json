@@ -1,0 +1,142 @@
+[
+    {
+        "cve": "CVE-2023-1000",
+        "cwe": "CWE-89",
+        "target": "SQL",
+        "dir": "..\\sandbox\\test_cases\\CVE-2023-1000_0",
+        "path": "..\\sandbox\\test_cases\\CVE-2023-1000_0\\vulnerable_sample.py"
+    },
+    {
+        "cve": "CVE-2023-1001",
+        "cwe": "CWE-79",
+        "target": "XSS",
+        "dir": "..\\sandbox\\test_cases\\CVE-2023-1001_1",
+        "path": "..\\sandbox\\test_cases\\CVE-2023-1001_1\\vulnerable_sample.py"
+    },
+    {
+        "cve": "CVE-2023-1002",
+        "cwe": "CWE-22",
+        "target": "PATH_TRAVERSAL",
+        "dir": "..\\sandbox\\test_cases\\CVE-2023-1002_2",
+        "path": "..\\sandbox\\test_cases\\CVE-2023-1002_2\\vulnerable_sample.py"
+    },
+    {
+        "cve": "CVE-2023-1003",
+        "cwe": "CWE-120",
+        "target": "BUFFER_OVERFLOW",
+        "dir": "..\\sandbox\\test_cases\\CVE-2023-1003_3",
+        "path": "..\\sandbox\\test_cases\\CVE-2023-1003_3\\vulnerable_sample.py"
+    },
+    {
+        "cve": "CVE-2023-1004",
+        "cwe": "CWE-502",
+        "target": "DESERIALIZATION",
+        "dir": "..\\sandbox\\test_cases\\CVE-2023-1004_4",
+        "path": "..\\sandbox\\test_cases\\CVE-2023-1004_4\\vulnerable_sample.py"
+    },
+    {
+        "cve": "CVE-2023-1005",
+        "cwe": "CWE-89",
+        "target": "SQL",
+        "dir": "..\\sandbox\\test_cases\\CVE-2023-1005_5",
+        "path": "..\\sandbox\\test_cases\\CVE-2023-1005_5\\vulnerable_sample.py"
+    },
+    {
+        "cve": "CVE-2023-1006",
+        "cwe": "CWE-79",
+        "target": "XSS",
+        "dir": "..\\sandbox\\test_cases\\CVE-2023-1006_6",
+        "path": "..\\sandbox\\test_cases\\CVE-2023-1006_6\\vulnerable_sample.py"
+    },
+    {
+        "cve": "CVE-2023-1007",
+        "cwe": "CWE-22",
+        "target": "PATH_TRAVERSAL",
+        "dir": "..\\sandbox\\test_cases\\CVE-2023-1007_7",
+        "path": "..\\sandbox\\test_cases\\CVE-2023-1007_7\\vulnerable_sample.py"
+    },
+    {
+        "cve": "CVE-2023-1008",
+        "cwe": "CWE-120",
+        "target": "BUFFER_OVERFLOW",
+        "dir": "..\\sandbox\\test_cases\\CVE-2023-1008_8",
+        "path": "..\\sandbox\\test_cases\\CVE-2023-1008_8\\vulnerable_sample.py"
+    },
+    {
+        "cve": "CVE-2023-1009",
+        "cwe": "CWE-502",
+        "target": "DESERIALIZATION",
+        "dir": "..\\sandbox\\test_cases\\CVE-2023-1009_9",
+        "path": "..\\sandbox\\test_cases\\CVE-2023-1009_9\\vulnerable_sample.py"
+    },
+    {
+        "cve": "CVE-2023-1010",
+        "cwe": "CWE-89",
+        "target": "SQL",
+        "dir": "..\\sandbox\\test_cases\\CVE-2023-1010_10",
+        "path": "..\\sandbox\\test_cases\\CVE-2023-1010_10\\vulnerable_sample.py"
+    },
+    {
+        "cve": "CVE-2023-1011",
+        "cwe": "CWE-79",
+        "target": "XSS",
+        "dir": "..\\sandbox\\test_cases\\CVE-2023-1011_11",
+        "path": "..\\sandbox\\test_cases\\CVE-2023-1011_11\\vulnerable_sample.py"
+    },
+    {
+        "cve": "CVE-2023-1012",
+        "cwe": "CWE-22",
+        "target": "PATH_TRAVERSAL",
+        "dir": "..\\sandbox\\test_cases\\CVE-2023-1012_12",
+        "path": "..\\sandbox\\test_cases\\CVE-2023-1012_12\\vulnerable_sample.py"
+    },
+    {
+        "cve": "CVE-2023-1013",
+        "cwe": "CWE-120",
+        "target": "BUFFER_OVERFLOW",
+        "dir": "..\\sandbox\\test_cases\\CVE-2023-1013_13",
+        "path": "..\\sandbox\\test_cases\\CVE-2023-1013_13\\vulnerable_sample.py"
+    },
+    {
+        "cve": "CVE-2023-1014",
+        "cwe": "CWE-502",
+        "target": "DESERIALIZATION",
+        "dir": "..\\sandbox\\test_cases\\CVE-2023-1014_14",
+        "path": "..\\sandbox\\test_cases\\CVE-2023-1014_14\\vulnerable_sample.py"
+    },
+    {
+        "cve": "CVE-2023-1015",
+        "cwe": "CWE-89",
+        "target": "SQL",
+        "dir": "..\\sandbox\\test_cases\\CVE-2023-1015_15",
+        "path": "..\\sandbox\\test_cases\\CVE-2023-1015_15\\vulnerable_sample.py"
+    },
+    {
+        "cve": "CVE-2023-1016",
+        "cwe": "CWE-79",
+        "target": "XSS",
+        "dir": "..\\sandbox\\test_cases\\CVE-2023-1016_16",
+        "path": "..\\sandbox\\test_cases\\CVE-2023-1016_16\\vulnerable_sample.py"
+    },
+    {
+        "cve": "CVE-2023-1017",
+        "cwe": "CWE-22",
+        "target": "PATH_TRAVERSAL",
+        "dir": "..\\sandbox\\test_cases\\CVE-2023-1017_17",
+        "path": "..\\sandbox\\test_cases\\CVE-2023-1017_17\\vulnerable_sample.py"
+    },
+    {
+        "cve": "CVE-2023-1018",
+        "cwe": "CWE-120",
+        "target": "BUFFER_OVERFLOW",
+        "dir": "..\\sandbox\\test_cases\\CVE-2023-1018_18",
+        "path": "..\\sandbox\\test_cases\\CVE-2023-1018_18\\vulnerable_sample.py"
+    },
+    {
+        "cve": "CVE-2023-1019",
+        "cwe": "CWE-502",
+        "target": "DESERIALIZATION",
+        "dir": "..\\sandbox\\test_cases\\CVE-2023-1019_19",
+        "path": "..\\sandbox\\test_cases\\CVE-2023-1019_19\\vulnerable_sample.py"
+    }
+]

@@ -19,6 +19,8 @@ class RemediationState(BaseModel):
     # Green Agent Outputs
     verification_status: str = Field("PENDING", description="Verification status: PENDING, PASS, FAIL.")
     verification_reasoning: Optional[str] = Field(None, description="Detailed reasoning from the Green Agent.")
+    regression_passed: Optional[bool] = Field(None, description="Boolean flag if regression tests passed.")
+    security_passed: Optional[bool] = Field(None, description="Boolean flag if security attacks failed after patch.")
     
     # Workflow Metadata
     iteration_count: int = Field(0, description="Current iteration of the fix-verify loop.")
