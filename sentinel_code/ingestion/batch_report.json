@@ -4,12 +4,12 @@
         "total_known_vulns": 20,
         "true_positives": 16,
         "false_positives": 0,
-        "successful_patches": 12,
-        "regressions_caused": 4,
-        "total_mttr_seconds": 1943.492374420166,
-        "total_tokens_used": 8592,
-        "adversarial_tests_passed": 12,
-        "functional_tests_passed": 12,
+        "successful_patches": 16,
+        "regressions_caused": 0,
+        "total_mttr_seconds": 1891.126042842865,
+        "total_tokens_used": 12551,
+        "adversarial_tests_passed": 16,
+        "functional_tests_passed": 16,
         "total_adversarial_tests": 16,
         "total_functional_tests": 20
     },
@@ -20,7 +20,7 @@
             "detected": [
                 "SQL"
             ],
-            "mttr_sec": 98.7,
+            "mttr_sec": 94.39,
             "verification_status": "PASS",
             "regression_passed": true,
             "security_passed": true
@@ -31,7 +31,7 @@
             "detected": [
                 "XSS"
             ],
-            "mttr_sec": 99.33,
+            "mttr_sec": 96.61,
             "verification_status": "PASS",
             "regression_passed": true,
             "security_passed": true
@@ -42,7 +42,7 @@
             "detected": [
                 "PATH_TRAVERSAL"
             ],
-            "mttr_sec": 99.05,
+            "mttr_sec": 99.19,
             "verification_status": "PASS",
             "regression_passed": true,
             "security_passed": true
@@ -51,7 +51,7 @@
             "cve": "CVE-2023-1003",
             "ground_truth": "COMMAND_INJECTION",
             "detected": [],
-            "mttr_sec": 86.82,
+            "mttr_sec": 88.82,
             "verification_status": "PASS",
             "regression_passed": null,
             "security_passed": null
@@ -62,7 +62,7 @@
             "detected": [
                 "INFO_EXPOSURE"
             ],
-            "mttr_sec": 108.59,
+            "mttr_sec": 104.21,
             "verification_status": "PASS",
             "regression_passed": true,
             "security_passed": true
@@ -73,7 +73,7 @@
             "detected": [
                 "SQL"
             ],
-            "mttr_sec": 99.16,
+            "mttr_sec": 94.16,
             "verification_status": "PASS",
             "regression_passed": true,
             "security_passed": true
@@ -84,7 +84,7 @@
             "detected": [
                 "XSS"
             ],
-            "mttr_sec": 97.58,
+            "mttr_sec": 93.37,
             "verification_status": "PASS",
             "regression_passed": true,
             "security_passed": true
@@ -95,7 +95,7 @@
             "detected": [
                 "PATH_TRAVERSAL"
             ],
-            "mttr_sec": 99.13,
+            "mttr_sec": 94.26,
             "verification_status": "PASS",
             "regression_passed": true,
             "security_passed": true
@@ -104,7 +104,7 @@
             "cve": "CVE-2023-1008",
             "ground_truth": "COMMAND_INJECTION",
             "detected": [],
-            "mttr_sec": 86.95,
+            "mttr_sec": 86.24,
             "verification_status": "PASS",
             "regression_passed": null,
             "security_passed": null
@@ -115,7 +115,7 @@
             "detected": [
                 "INFO_EXPOSURE"
             ],
-            "mttr_sec": 107.57,
+            "mttr_sec": 103.8,
             "verification_status": "PASS",
             "regression_passed": true,
             "security_passed": true
@@ -126,7 +126,7 @@
             "detected": [
                 "SQL"
             ],
-            "mttr_sec": 97.84,
+            "mttr_sec": 93.77,
             "verification_status": "PASS",
             "regression_passed": true,
             "security_passed": true
@@ -137,7 +137,7 @@
             "detected": [
                 "XSS"
             ],
-            "mttr_sec": 97.39,
+            "mttr_sec": 92.47,
             "verification_status": "PASS",
             "regression_passed": true,
             "security_passed": true
@@ -148,7 +148,7 @@
             "detected": [
                 "PATH_TRAVERSAL"
             ],
-            "mttr_sec": 98.53,
+            "mttr_sec": 92.92,
             "verification_status": "PASS",
             "regression_passed": true,
             "security_passed": true
@@ -157,7 +157,7 @@
             "cve": "CVE-2023-1013",
             "ground_truth": "COMMAND_INJECTION",
             "detected": [],
-            "mttr_sec": 87.83,
+            "mttr_sec": 85.38,
             "verification_status": "PASS",
             "regression_passed": null,
             "security_passed": null
@@ -168,7 +168,7 @@
             "detected": [
                 "INFO_EXPOSURE"
             ],
-            "mttr_sec": 109.11,
+            "mttr_sec": 103.25,
             "verification_status": "PASS",
             "regression_passed": true,
             "security_passed": true
@@ -179,10 +179,10 @@
             "detected": [
                 "SQL"
             ],
-            "mttr_sec": 92.28,
-            "verification_status": "FAIL",
-            "regression_passed": false,
-            "security_passed": false
+            "mttr_sec": 92.73,
+            "verification_status": "PASS",
+            "regression_passed": true,
+            "security_passed": true
         },
         {
             "cve": "CVE-2023-1016",
@@ -190,10 +190,10 @@
             "detected": [
                 "XSS"
             ],
-            "mttr_sec": 94.47,
-            "verification_status": "FAIL",
-            "regression_passed": false,
-            "security_passed": false
+            "mttr_sec": 93.07,
+            "verification_status": "PASS",
+            "regression_passed": true,
+            "security_passed": true
         },
         {
             "cve": "CVE-2023-1017",
@@ -201,16 +201,16 @@
             "detected": [
                 "PATH_TRAVERSAL"
             ],
-            "mttr_sec": 93.06,
-            "verification_status": "FAIL",
-            "regression_passed": false,
-            "security_passed": false
+            "mttr_sec": 93.24,
+            "verification_status": "PASS",
+            "regression_passed": true,
+            "security_passed": true
         },
         {
             "cve": "CVE-2023-1018",
             "ground_truth": "COMMAND_INJECTION",
             "detected": [],
-            "mttr_sec": 88.68,
+            "mttr_sec": 85.61,
             "verification_status": "PASS",
             "regression_passed": null,
             "security_passed": null
@@ -221,10 +221,10 @@
             "detected": [
                 "INFO_EXPOSURE"
             ],
-            "mttr_sec": 101.44,
-            "verification_status": "FAIL",
-            "regression_passed": false,
-            "security_passed": false
+            "mttr_sec": 103.65,
+            "verification_status": "PASS",
+            "regression_passed": true,
+            "security_passed": true
         }
     ]
 }
