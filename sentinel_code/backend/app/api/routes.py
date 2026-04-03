@@ -5,6 +5,7 @@ import uuid
 from app.models.state import RemediationState
 from app.graph.workflow import app as workflow_app
 from app.services.logger import get_logger
+from app.services.target_validator import validate_target_file
 from app.core.vulnerability_config import VULNERABILITIES
 
 router = APIRouter()
@@ -50,6 +51,10 @@ def run_workflow(workflow_id: str, initial_state: RemediationState):
 
 @router.post("/remediate", response_model=Dict[str, str])
 async def start_remediation(request: RemediationRequest, background_tasks: BackgroundTasks):
+    is_valid, validation_message = validate_target_file(request.code_path)
+    if not is_valid:
+        raise HTTPException(status_code=400, detail=validation_message)
+
     workflow_id = str(uuid.uuid4())
     
     all_vulns = list(VULNERABILITIES.keys())
@@ -87,14 +92,13 @@ async def apply_patch(workflow_id: str):
     
     state = workflow_store[workflow_id]
     
-    if not state.patch_diff:
+    if not (state.patched_code or state.patch_diff):
         raise HTTPException(status_code=400, detail="No patch available to apply")
         
     try:
-        # In a real scenario, we might use a sandbox service here.
-        # Since patch_diff currently stores the FULL verified code:
+        patch_content = state.patched_code or state.patch_diff
         with open(state.code_path, "w") as f:
-            f.write(state.patch_diff)
+            f.write(patch_content)
             
         return {"status": "success", "message": "Patch applied successfully"}
     except Exception as e:
@@ -117,6 +121,10 @@ async def get_vulnerabilities():
         "total": len(vulnerabilities),
         "vulnerabilities": vulnerabilities
     }
+
+@router.get("/health", response_model=Dict[str, str])
+async def health_check():
+    return {"status": "online"}
 
 @router.get("/metrics/showcase")
 async def get_metrics_showcase():

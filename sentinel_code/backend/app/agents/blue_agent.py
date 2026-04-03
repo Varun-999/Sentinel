@@ -1,7 +1,22 @@
 from app.models.state import RemediationState
 from app.services.llm import llm_service
 from app.services.logger import get_logger
+import difflib
 import os
+
+
+def _build_unified_diff(original_code: str, updated_code: str) -> str:
+    diff_lines = difflib.unified_diff(
+        original_code.splitlines(),
+        updated_code.splitlines(),
+        fromfile="original.py",
+        tofile="patched.py",
+        lineterm="",
+    )
+    diff_text = "\n".join(diff_lines)
+    if diff_text.strip():
+        return diff_text
+    return updated_code
 
 def blue_agent(state: RemediationState) -> RemediationState:
     """
@@ -15,6 +30,21 @@ def blue_agent(state: RemediationState) -> RemediationState:
     
     with open(state.code_path, "r") as f:
         code_content = f.read()
+
+    # Dedicated deterministic test fixture for frontend/state-flow verification.
+    # This avoids spending LLM calls when we intentionally want the workflow to
+    # end in FAIL after the max iteration count.
+    if os.path.basename(state.code_path) == "force_verification_fail.py":
+        msg = "Deterministic test fixture detected. Reusing code to force verification failure flow."
+        if logger:
+            logger.log_and_print("Blue Agent", msg)
+        else:
+            print(msg)
+        state.patched_code = code_content
+        state.patch_diff = _build_unified_diff(code_content, code_content)
+        state.patch_explanation = "Debug fixture: retained original code to exercise the repeated verification failure path."
+        state.iteration_count += 1
+        return state
     
     # Demonstrate agent cycling by intentionally failing the first iteration
     if state.iteration_count == 0:
@@ -23,9 +53,11 @@ def blue_agent(state: RemediationState) -> RemediationState:
             logger.log_and_print("Blue Agent", msg)
         else:
             print(msg)
-        state.patch_diff = code_content.replace(
+        flawed_code = code_content.replace(
             "def ", "# INITIAL FLAWED BATCH PATCH ATTEMPT\ndef "
         )
+        state.patched_code = flawed_code
+        state.patch_diff = _build_unified_diff(code_content, flawed_code)
         state.patch_explanation = "Initial attempt: Tried to fix the issues by adding comments, but the core vulnerabilities remain unpatched."
     else:
         # Build prompt for all successful exploits
@@ -73,7 +105,9 @@ def blue_agent(state: RemediationState) -> RemediationState:
         elif "```" in fixed_code:
             fixed_code = fixed_code.split("```")[1].split("```")[0].strip()
         
-        state.patch_diff = fixed_code.strip()
+        fixed_code = fixed_code.strip()
+        state.patched_code = fixed_code
+        state.patch_diff = _build_unified_diff(code_content, fixed_code)
         state.patch_explanation = f"Applied unified secure coding patterns to remediate: {', '.join(vulns_to_fix)}."
     
     state.iteration_count += 1

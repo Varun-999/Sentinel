@@ -28,4 +28,9 @@ export const applyPatch = async (workflow_id) => {
     return response.data;
 };
 
+export const getHealth = async () => {
+    const response = await api.get('/health');
+    return response.data;
+};
+
 export default api;

@@ -3,6 +3,7 @@ from app.services.llm import llm_service
 from app.core.test_harness import test_harness
 from app.core.vulnerability_config import get_payloads_for_type
 from app.services.logger import get_logger
+from app.services.target_validator import validate_target_file
 import os
 
 def red_agent(state: RemediationState) -> RemediationState:
@@ -16,8 +17,11 @@ def red_agent(state: RemediationState) -> RemediationState:
     else:
         print("--- Red Agent: Attacking ---")
     
-    if not os.path.exists(state.code_path):
-        msg = f"Error: File {state.code_path} not found."
+    is_valid, validation_message = validate_target_file(state.code_path)
+    if not is_valid:
+        msg = validation_message
+        state.verification_status = "FAIL"
+        state.verification_reasoning = validation_message
         if logger:
             logger.log_and_print("Red Agent", msg)
         else:

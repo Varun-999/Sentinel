@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import RemediationForm from './components/RemediationForm';
 import StatusView from './components/StatusView';
 import MetricsShowcase from './components/MetricsShowcase';
 import VulnerabilityClasses from './components/VulnerabilityClasses';
 import { Shield, Activity, Code2, BookOpen } from 'lucide-react';
+import { getHealth } from './services/api';
 
 const queryClient = new QueryClient();
 
@@ -12,6 +13,39 @@ function App() {
     const [workflowId, setWorkflowId] = useState(null);
     const [isDevMode, setIsDevMode] = useState(false);
     const [activeTab, setActiveTab] = useState('live');
+    const [landingError, setLandingError] = useState('');
+    const [serverOnline, setServerOnline] = useState(true);
+
+    const handleReturnHome = (message = '') => {
+        setWorkflowId(null);
+        setIsDevMode(false);
+        setLandingError(message);
+    };
+
+    useEffect(() => {
+        let cancelled = false;
+
+        const checkHealth = async () => {
+            try {
+                const data = await getHealth();
+                if (!cancelled) {
+                    setServerOnline(data?.status === 'online');
+                }
+            } catch (err) {
+                if (!cancelled) {
+                    setServerOnline(false);
+                }
+            }
+        };
+
+        checkHealth();
+        const intervalId = window.setInterval(checkHealth, 3000);
+
+        return () => {
+            cancelled = true;
+            window.clearInterval(intervalId);
+        };
+    }, []);
 
     return (
         <QueryClientProvider client={queryClient}>
@@ -52,9 +86,15 @@ function App() {
                            </button>
                         </div>
                         
-                        <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-emerald-500/10 text-emerald-400 text-xs rounded-full border border-emerald-500/20 backdrop-blur-md font-medium shadow-[0_0_10px_rgba(16,185,129,0.1)]">
-                            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
-                            SYSTEM ONLINE
+                        <div
+                            className={`inline-flex items-center gap-2 px-3 py-1.5 text-xs rounded-full border backdrop-blur-md font-medium transition-colors ${
+                                serverOnline
+                                    ? 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20 shadow-[0_0_10px_rgba(16,185,129,0.1)]'
+                                    : 'bg-red-500/10 text-red-400 border-red-500/20 shadow-[0_0_10px_rgba(239,68,68,0.12)]'
+                            }`}
+                        >
+                            <span className={`w-1.5 h-1.5 rounded-full ${serverOnline ? 'bg-emerald-400 animate-pulse' : 'bg-red-400'}`}></span>
+                            {serverOnline ? 'SYSTEM ONLINE' : 'SERVER OFFLINE'}
                         </div>
                     </div>
                 </header>
@@ -67,10 +107,17 @@ function App() {
                     ) : (
                         !workflowId ? (
                             <>
-                                <RemediationForm onStart={setWorkflowId} />
+                                <RemediationForm
+                                    onStart={(id) => {
+                                        setLandingError('');
+                                        setWorkflowId(id);
+                                    }}
+                                    initialError={landingError}
+                                    onClearInitialError={() => setLandingError('')}
+                                />
                                 <div className="mt-8 flex justify-center">
                                     <button
-                                        onClick={() => { setWorkflowId('dev_preview'); setIsDevMode(true); }}
+                                        onClick={() => { setLandingError(''); setWorkflowId('dev_preview'); setIsDevMode(true); }}
                                         className="text-xs text-slate-500 hover:text-indigo-400 font-mono transition-colors opacity-70 hover:opacity-100 flex items-center gap-1.5 border border-transparent hover:border-indigo-500/30 px-3 py-1.5 rounded-full"
                                     >
                                         <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" /></svg>
@@ -81,12 +128,16 @@ function App() {
                         ) : (
                             <div className="space-y-6">
                                 <button
-                                    onClick={() => { setWorkflowId(null); setIsDevMode(false); }}
+                                    onClick={() => handleReturnHome('')}
                                     className="inline-flex items-center gap-2 text-sm text-indigo-400 hover:text-indigo-300 font-medium transition-colors hover:bg-white/5 px-3 py-1.5 rounded-lg -ml-3"
                                 >
                                     ← Return to Mission Control
                                 </button>
-                                <StatusView workflowId={workflowId} isDevMode={isDevMode} />
+                                <StatusView
+                                    workflowId={workflowId}
+                                    isDevMode={isDevMode}
+                                    onReturnHome={handleReturnHome}
+                                />
                             </div>
                         )
                     )}

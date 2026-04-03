@@ -3,6 +3,7 @@ from app.services.llm import llm_service
 from app.core.test_harness import test_harness
 from app.core.ast_analyzer import analyze_ast
 from app.services.logger import get_logger
+import os
 
 def green_agent(state: RemediationState) -> RemediationState:
     """
@@ -13,6 +14,25 @@ def green_agent(state: RemediationState) -> RemediationState:
         logger.log_and_print("Green Agent", "--- Green Agent: Verifying ---")
     else:
         print("--- Green Agent: Verifying ---")
+
+    if os.path.basename(state.code_path) == "force_verification_fail.py":
+        reasoning = (
+            "Deterministic frontend test fixture: forcing verification failure for this target. "
+            f"Iteration {state.iteration_count} of {state.max_iterations}."
+        )
+        state.verification_status = "FAIL"
+        state.verification_reasoning = reasoning
+        state.regression_passed = False
+        state.security_passed = False
+        if logger:
+            logger.log_and_print("Green Agent", "Verification Result: FAIL")
+            logger.log_and_print("Green Agent", f"Reasoning: {reasoning}")
+        else:
+            print("Verification Result: FAIL")
+            print(f"Reasoning: {reasoning}")
+        return state
+
+    code_under_test = state.patched_code or state.patch_diff or ""
     
     # 1. AST-Level Safety Analysis
     msg = "Running AST Analysis..."
@@ -20,7 +40,7 @@ def green_agent(state: RemediationState) -> RemediationState:
         logger.log_and_print("Green Agent", msg)
     else:
         print(msg)
-    ast_errors = analyze_ast(state.patch_diff)
+    ast_errors = analyze_ast(code_under_test)
     
     ast_reasoning = ""
     if ast_errors:
@@ -45,7 +65,7 @@ def green_agent(state: RemediationState) -> RemediationState:
     
     # Ensure we test all discovered vulnerabilities
     results = test_harness.verify_fix(
-        code_content=state.patch_diff,
+        code_content=code_under_test,
         vulnerability_checklist=state.vulnerability_checklist,
         successful_payloads=state.successful_payloads
     )

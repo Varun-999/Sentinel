@@ -3,7 +3,63 @@ import { useQuery } from '@tanstack/react-query';
 import { getStatus } from '../services/api';
 import { Shield, ShieldAlert, ShieldCheck, Activity, Terminal } from 'lucide-react';
 
-const StatusView = ({ workflowId, isDevMode }) => {
+const renderPatchDiff = (patchDiff) => {
+    if (!patchDiff) return null;
+
+    const lines = patchDiff.split('\n');
+
+    return lines.map((line, idx) => {
+        let lineClass = 'text-slate-300';
+        let prefixClass = 'text-slate-600';
+
+        if (line.startsWith('@@')) {
+            lineClass = 'text-cyan-300 bg-cyan-500/10';
+            prefixClass = 'text-cyan-400';
+        } else if (line.startsWith('+')) {
+            lineClass = 'text-emerald-300 bg-emerald-500/10';
+            prefixClass = 'text-emerald-400';
+        } else if (line.startsWith('-')) {
+            lineClass = 'text-red-300 bg-red-500/10';
+            prefixClass = 'text-red-400';
+        }
+
+        const prefix = line.length > 0 ? line[0] : ' ';
+        const content = line.length > 0 ? line.slice(1) : '';
+        const shouldSplitPrefix = line.startsWith('@@') || line.startsWith('+') || line.startsWith('-');
+
+        return (
+            <div
+                key={`${idx}-${line}`}
+                className={`${lineClass} whitespace-pre font-mono text-[13px] leading-relaxed px-4 ${shouldSplitPrefix ? '' : 'py-[1px]'}`}
+            >
+                {shouldSplitPrefix ? (
+                    <>
+                        <span className={`${prefixClass} inline-block w-4 select-none`}>{prefix}</span>
+                        <span>{content}</span>
+                    </>
+                ) : (
+                    line || ' '
+                )}
+            </div>
+        );
+    });
+};
+
+const getPatchFormat = (patchDiff) => {
+    if (!patchDiff) return null;
+
+    const lines = patchDiff.split('\n');
+    const hasUnifiedHeader = lines.some((line) => line.startsWith('--- ') || line.startsWith('+++ ') || line.startsWith('@@'));
+    const hasDiffLines = lines.some((line) => line.startsWith('+') || line.startsWith('-'));
+
+    if (hasUnifiedHeader || hasDiffLines) {
+        return 'Unified Diff';
+    }
+
+    return 'Full File';
+};
+
+const StatusView = ({ workflowId, isDevMode, onReturnHome }) => {
     const { data, error, isLoading } = useQuery({
         queryKey: ['workflow', workflowId],
         queryFn: () => getStatus(workflowId),
@@ -22,6 +78,21 @@ const StatusView = ({ workflowId, isDevMode }) => {
     useEffect(() => {
         logsEndRef.current?.scrollIntoView({ behavior: 'smooth' });
     }, [data?.logs?.events]);
+
+    useEffect(() => {
+        if (isDevMode) return undefined;
+        const state = data?.state;
+        const reason = state?.verification_reasoning || '';
+        const isValidationFailure = state?.verification_status === 'FAIL' && reason.startsWith('Validation failed:');
+
+        if (!isValidationFailure) return undefined;
+
+        const redirectTimer = window.setTimeout(() => {
+            onReturnHome?.(reason);
+        }, 1800);
+
+        return () => window.clearTimeout(redirectTimer);
+    }, [data?.state, isDevMode, onReturnHome]);
 
     const mockData = {
         state: {
@@ -67,6 +138,12 @@ const StatusView = ({ workflowId, isDevMode }) => {
     const { state, logs } = activeData || {};
 
     if (!state) return <div className="text-center text-yellow-500">Initializing state...</div>;
+
+    const validationFailure = !isDevMode &&
+        state.verification_status === 'FAIL' &&
+        typeof state.verification_reasoning === 'string' &&
+        state.verification_reasoning.startsWith('Validation failed:');
+    const patchFormat = getPatchFormat(state.patch_diff);
 
 
     // improved status logic
@@ -116,6 +193,16 @@ const StatusView = ({ workflowId, isDevMode }) => {
 
     return (
         <div className="space-y-6">
+            {validationFailure && (
+                <div className="bg-red-500/10 border border-red-500/20 rounded-2xl p-4 text-red-300 flex items-start gap-3">
+                    <ShieldAlert className="w-5 h-5 mt-0.5 shrink-0" />
+                    <div>
+                        <p className="font-semibold text-red-200">Target validation failed.</p>
+                        <p className="text-sm mt-1">{state.verification_reasoning}</p>
+                        <p className="text-xs text-red-300/80 mt-2">Returning to Mission Control so you can provide a valid Python target.</p>
+                    </div>
+                </div>
+            )}
             {/* 3-Column Layout: Metrics, Checklist, Live Logs */}
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 min-h-[500px]">
                 {/* Column 1: Metrics */}
@@ -233,6 +320,15 @@ const StatusView = ({ workflowId, isDevMode }) => {
                             <Activity size={18} />
                         </div>
                         <h3 className="text-slate-200 font-semibold tracking-wide">Proposed Patch</h3>
+                        {patchFormat && (
+                            <span className={`ml-2 inline-flex items-center rounded-full border px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.18em] ${
+                                patchFormat === 'Unified Diff'
+                                    ? 'border-emerald-500/30 bg-emerald-500/10 text-emerald-300'
+                                    : 'border-slate-600 bg-slate-800/80 text-slate-300'
+                            }`}>
+                                {patchFormat}
+                            </span>
+                        )}
                     </div>
                     {state.patch_diff && state.verification_status === 'PASS' && (
                         <button
@@ -253,9 +349,19 @@ const StatusView = ({ workflowId, isDevMode }) => {
                         <div className="w-2.5 h-2.5 rounded-full bg-slate-700"></div>
                         <span className="ml-2 text-xs text-slate-500 font-mono">diff --git</span>
                     </div>
-                    <pre className="p-4 text-emerald-300/90 font-mono text-[13px] overflow-auto flex-grow max-h-[360px] leading-relaxed">
-                        {state.patch_diff || (state.verification_status === 'PASS' ? <span className="text-slate-500">No patch required.</span> : <span className="text-slate-500 italic">Waiting for patch generation...</span>)}
-                    </pre>
+                    <div className="overflow-auto flex-grow max-h-[360px] py-3">
+                        {state.patch_diff ? (
+                            renderPatchDiff(state.patch_diff)
+                        ) : (
+                            <div className="px-4 py-1 font-mono text-[13px] leading-relaxed">
+                                {state.verification_status === 'PASS' ? (
+                                    <span className="text-slate-500">No patch required.</span>
+                                ) : (
+                                    <span className="text-slate-500 italic">Waiting for patch generation...</span>
+                                )}
+                            </div>
+                        )}
+                    </div>
                 </div>
             </div>
         </div>

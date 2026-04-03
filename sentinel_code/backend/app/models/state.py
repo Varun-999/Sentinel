@@ -14,6 +14,7 @@ class RemediationState(BaseModel):
     
     # Blue Agent Outputs
     patch_diff: Optional[str] = Field(None, description="The generated consolidated patch in diff format.")
+    patched_code: Optional[str] = Field(None, description="The full patched Python file content used for verification and apply.")
     patch_explanation: Optional[str] = Field(None, description="Explanation of the applied consolidated fix.")
     
     # Green Agent Outputs
