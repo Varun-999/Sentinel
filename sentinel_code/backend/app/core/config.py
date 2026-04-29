@@ -18,13 +18,16 @@ class Settings:
     GEMINI_API_KEY: str = os.getenv("GEMINI_API_KEY", "")
     GROQ_API_KEY: str = os.getenv("GROQ_API_KEY", "")
     
-    # Provider selection: 'gemini' or 'groq'
-    LLM_PROVIDER: str = os.getenv("LLM_PROVIDER", "groq")
+    # Provider selection: 'gemini', 'groq', or 'ollama'
+    LLM_PROVIDER: str = os.getenv("LLM_PROVIDER", "ollama")
 
     @property
     def MODEL_NAME(self) -> str:
         if self.LLM_PROVIDER == "groq":
             return "llama-3.3-70b-versatile"
+        elif self.LLM_PROVIDER == "ollama":
+            return "gemma3:4b"
+        #llama3.1:8b
         return "gemini-2.0-flash"
     
     def validate(self):
@@ -32,5 +35,8 @@ class Settings:
             raise ValueError("GEMINI_API_KEY is not set in environment variables or .env file.")
         if self.LLM_PROVIDER == "groq" and not self.GROQ_API_KEY:
             raise ValueError("GROQ_API_KEY is not set in environment variables or .env file.")
+        if self.LLM_PROVIDER == "ollama":
+            # Ollama runs locally, no API key needed
+            pass
 
 settings = Settings()

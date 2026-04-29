@@ -1,6 +1,7 @@
 from app.core.config import settings
 
 import time
+import requests
 
 class LLMService:
     def __init__(self):
@@ -15,6 +16,8 @@ class LLMService:
         elif self.provider == "groq":
             from groq import Groq
             self.client = Groq(api_key=settings.GROQ_API_KEY)
+        elif self.provider == "ollama":
+            self.ollama_url = "http://localhost:11434/api/generate"
 
     def generate_text(self, prompt: str, max_retries: int = 4) -> str:
         """
@@ -51,6 +54,21 @@ class LLMService:
                     if hasattr(chat_completion, 'usage') and chat_completion.usage:
                         self.total_tokens_used += getattr(chat_completion.usage, 'total_tokens', len(prompt)//4)
                     return chat_completion.choices[0].message.content
+                    
+                elif self.provider == "ollama":
+                    response = requests.post(
+                        self.ollama_url,
+                        json={
+                            "model": self.model_name,
+                            "prompt": prompt,
+                            "stream": False
+                        },
+                        timeout=600.0
+                    )
+                    response.raise_for_status()
+                    result = response.json()
+                    self.total_tokens_used += len(prompt) // 4  # Rough estimate
+                    return result.get("response", "")
                     
             except Exception as e:
                 last_error = e

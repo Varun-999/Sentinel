@@ -204,11 +204,11 @@ const StatusView = ({ workflowId, isDevMode, onReturnHome }) => {
                 </div>
             )}
             {/* 3-Column Layout: Metrics, Checklist, Live Logs */}
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 min-h-[500px]">
+            <div className="grid lg:grid-cols-3 gap-6 min-h-[500px]">
                 {/* Column 1: Metrics */}
                 <div className="flex flex-col gap-6">
                     <div className="bg-[#131A2A]/60 backdrop-blur-md p-5 rounded-2xl border border-white/5 shadow-lg relative overflow-hidden group">
-                        <div className="absolute top-0 right-0 w-32 h-32 bg-blue-500/10 rounded-full blur-2xl -mr-10 -mt-10 pointer-events-none"></div>
+                        <div className="absolute top-0 right-0 w-16 h-32 bg-blue-500/10 rounded-full blur-2xl -mr-10 -mt-10 pointer-events-none"></div>
                         <h3 className="text-slate-500 text-xs font-bold uppercase tracking-wider mb-2">Iteration</h3>
                         <div className="flex items-baseline gap-2">
                             <p className="text-3xl font-mono text-white">{state.iteration_count}</p>
